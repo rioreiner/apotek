@@ -9,6 +9,13 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6">
+                    <form action="{{ route('dashboard') }}" method="GET" class="mb-6">
+                    
+                    <div class="col-md-10">
+                        <input type="text" name="search" class="form-control" 
+                               placeholder="Cari nama Obat..." value="{{ request('search') }}">
+                        </div>
+                        </form>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         @forelse($medicines as $medicine)
                             <div class="border rounded-lg p-4 hover:shadow-lg transition-shadow duration-200">

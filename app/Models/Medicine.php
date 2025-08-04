@@ -15,6 +15,7 @@ class Medicine extends Model
         'price',
         'stock',
         'category',
+        'image',
         'expired_date',
         'manufacturer'
     ];

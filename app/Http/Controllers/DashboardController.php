@@ -16,8 +16,17 @@ class DashboardController extends Controller
             
             return view('dashboard.admin', compact('totalMedicines', 'lowStock', 'expiringSoon'));
         } else {
-            $medicines = Medicine::where('stock', '>', 0)->paginate(12);
-            return view('dashboard.user', compact('medicines'));
+              $query = Medicine::where('stock', '>', 0);
+
+        if (request()->has('search') && request('search') != '') {
+            $search = request('search');
+            $query->where('name', 'like', "%{$search}%");
         }
+
+        $medicines = $query->paginate(12)->withQueryString();
+
+        return view('dashboard.user', compact('medicines'));
+        }
+
     }
 }

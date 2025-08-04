@@ -9,9 +9,17 @@
         <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6">
-                    <form action="{{ route('medicines.store') }}" method="POST">
+                    <form action="{{ route('medicines.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        
+                          <div class="mb-4">
+                            <label for="name" class="block text-sm font-medium text-gray-700">Gambar Obat</label>
+                            <input type="file" name="image" id="image" value="{{ old('image') }}" 
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+                            @error('image')
+                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                        </div>
+
                         <div class="mb-4">
                             <label for="name" class="block text-sm font-medium text-gray-700">Nama Obat</label>
                             <input type="text" name="name" id="name" value="{{ old('name') }}" 

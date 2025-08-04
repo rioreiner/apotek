@@ -1,124 +1,76 @@
-<x-app-layout>
-    <x-slot name="header">
-        <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ $medicine->name }}
-            </h2>
-            @if(auth()->user()->isAdmin())
-                <div class="space-x-2">
-                    <a href="{{ route('medicines.edit', $medicine) }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">
-                        Edit
-                    </a>
-                    <form action="{{ route('medicines.destroy', $medicine) }}" method="POST" class="inline">
+@extends('layouts.master')
+
+@section('obat')
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="display-5 fw-bold text-dark">Info Obat</h2>
+        <hr>
+    </div>
+    <div class="card shadow-sm mx-auto" style="max-width: 30rem;">
+        
+
+        <div class="card-body bg-light" style="box-shadow: 0 0 15px rgba(0,0,0,0.8);">
+            <div class="text-center mb-3">
+                @if ($medicine->image)
+                    <img src="{{ asset('storage/'.$medicine->image) }}"
+                         class="img-fluid rounded"
+                         style="height: 200px; object-fit: cover; width: 100%;border-radius:10px;">
+                @else
+                    <p class="text-danger">GAMBAR TIDAK ADA!</p>
+                @endif
+            </div>
+
+            <ul class="list-group list-group-flush mb-3">
+                <h2 class="text-primary" style="font-family: Impact;">{{ $medicine->name }}</h2>
+                <li class="list-group-item"><strong>Kategori:</strong> {{ $medicine->category }}</li>
+                <li class="list-group-item"><strong>Produsen:</strong> {{ $medicine->manufacturer }}</li>
+                <li class="list-group-item"><strong>Harga:</strong> Rp {{ number_format($medicine->price, 2, ',', '.') }}</li>
+                <li class="list-group-item">
+                    <strong>Stok:</strong> 
+                    <span class="badge {{ $medicine->stock < 10 ? 'bg-danger' : ($medicine->stock < 50 ? 'bg-warning text-dark' : 'bg-success') }}">
+                        {{ $medicine->stock }} unit
+                    </span>
+                </li>
+                <li class="list-group-item"><strong>Deskripsi:</strong> {{ $medicine->description ?: 'Tidak ada deskripsi' }}</li>
+                <li class="list-group-item">
+                    <strong>Tanggal Kadaluarsa:</strong> 
+                    {{ $medicine->expired_date ? $medicine->expired_date->format('d F Y') : 'Tidak diketahui' }}
+                </li>
+                <li class="list-group-item">
+                    <strong>Status Kadaluarsa:</strong>
+                   @php
+                        $daysUntilExpiry = (int)now()->diffInDays($medicine->expired_date, false);
+                    @endphp
+                    @if($daysUntilExpiry < 0)
+                        <span class="badge bg-danger">Sudah Kadaluarsa</span>
+                    @elseif($daysUntilExpiry <= 90)
+                        <span class="badge bg-warning text-dark">{{ $daysUntilExpiry }} hari lagi</span>
+                    @else
+                        <span class="badge bg-success">Masih Segar</span>
+                    @endif
+                </li>
+            </ul>
+
+            <div class="text-muted small">
+                <p>Dibuat: {{ $medicine->created_at->format('d F Y H:i') }}</p>
+                <p>Diperbarui: {{ $medicine->updated_at->format('d F Y H:i') }}</p>
+            </div>
+            <div class="card-footer text-end">
+                @if(auth()->user()->isAdmin())
+                    <a href="{{ route('medicines.edit', $medicine) }}" class="btn btn-warning"> <i class="bi bi-pencil"></i>
+                        Edit</a>
+                    <form action="{{ route('medicines.destroy', $medicine) }}" method="POST" class="d-inline"
+                          onsubmit="return confirm('Yakin ingin menghapus?')">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onclick="return confirm('Yakin ingin menghapus?')">
-                            Hapus
-                        </button>
+                        <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i>Hapus</button>
                     </form>
-                </div>
             @endif
+            <a href="{{ Auth::user()->isAdmin() ? route('medicines.index') : route('dashboard') }}" class="btn btn-secondary">
+            <i class="bi bi-arrow-left-circle"></i> Kembali
+            </a>
         </div>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <!-- Informasi Utama -->
-                        <div>
-                            <h3 class="text-lg font-semibold text-gray-900 mb-4">Informasi Obat</h3>
-                            <dl class="space-y-3">
-                                <div>
-                                    <dt class="text-sm font-medium text-gray-500">Nama Obat</dt>
-                                    <dd class="text-lg font-semibold text-gray-900">{{ $medicine->name }}</dd>
-                                </div>
-                                
-                                <div>
-                                    <dt class="text-sm font-medium text-gray-500">Kategori</dt>
-                                    <dd>
-                                        <span class="px-3 py-1 inline-flex text-sm leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
-                                            {{ $medicine->category }}
-                                        </span>
-                                    </dd>
-                                </div>
-                                
-                                <div>
-                                    <dt class="text-sm font-medium text-gray-500">Produsen</dt>
-                                    <dd class="text-base text-gray-900">{{ $medicine->manufacturer }}</dd>
-                                </div>
-                                
-                                <div>
-                                    <dt class="text-sm font-medium text-gray-500">Deskripsi</dt>
-                                    <dd class="text-base text-gray-900">{{ $medicine->description ?: 'Tidak ada deskripsi' }}</dd>
-                                </div>
-                            </dl>
-                        </div>
-
-                        <!-- Informasi Stok & Harga -->
-                        <div>
-                            <h3 class="text-lg font-semibold text-gray-900 mb-4">Stok & Harga</h3>
-                            <dl class="space-y-3">
-                                <div>
-                                    <dt class="text-sm font-medium text-gray-500">Harga</dt>
-                                    <dd class="text-2xl font-bold text-green-600">Rp {{ number_format($medicine->price, 0, ',', '.') }}</dd>
-                                </div>
-                                
-                                <div>
-                                    <dt class="text-sm font-medium text-gray-500">Stok Tersedia</dt>
-                                    <dd>
-                                        <span class="px-3 py-1 inline-flex text-lg leading-6 font-semibold rounded-full 
-                                            {{ $medicine->stock < 10 ? 'bg-red-100 text-red-800' : ($medicine->stock < 50 ? 'bg-yellow-100 text-yellow-800' : 'bg-green-100 text-green-800') }}">
-                                            {{ $medicine->stock }} unit
-                                        </span>
-                                    </dd>
-                                </div>
-                                
-                                <div>
-                                    <dt class="text-sm font-medium text-gray-500">Tanggal Kadaluarsa</dt>
-                                    <dd class="text-base text-gray-900">{{ $medicine->expired_date->format('d F Y') }}</dd>
-                                </div>
-                                
-                                <div>
-                                    <dt class="text-sm font-medium text-gray-500">Status Kadaluarsa</dt>
-                                    <dd>
-                                        @php
-                                            $daysUntilExpiry = now()->diffInDays($medicine->expired_date, false);
-                                        @endphp
-                                        @if($daysUntilExpiry < 0)
-                                            <span class="px-3 py-1 inline-flex text-sm leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                                                Sudah Kadaluarsa
-                                            </span>
-                                        @elseif($daysUntilExpiry <= 90)
-                                            <span class="px-3 py-1 inline-flex text-sm leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
-                                                {{ $daysUntilExpiry }} hari lagi
-                                            </span>
-                                        @else
-                                            <span class="px-3 py-1 inline-flex text-sm leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                                Masih Segar
-                                            </span>
-                                        @endif
-                                    </dd>
-                                </div>
-                            </dl>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-8 pt-6 border-t border-gray-200">
-                        <div class="flex justify-between items-center">
-                            <a href="{{ route('medicines.index') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
-                                ← Kembali ke Daftar
-                            </a>
-                            
-                            <div class="text-sm text-gray-500">
-                                <p>Dibuat: {{ $medicine->created_at->format('d F Y H:i') }}</p>
-                                <p>Diperbarui: {{ $medicine->updated_at->format('d F Y H:i') }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
-</x-app-layout>
+</div>
+@endsection

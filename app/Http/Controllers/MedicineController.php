@@ -26,10 +26,12 @@ class MedicineController extends Controller
             'price' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
             'category' => 'required|string|max:255',
+            'image' => 'required|image|mimes: jpg,jpeg,png|max: 2046',
             'expired_date' => 'required|date|after:today',
             'manufacturer' => 'required|string|max:255',
         ]);
-
+        $gambar = $request->file('image')->store('gambar_obat', 'public');
+        $validated['image'] = $gambar;
         Medicine::create($validated);
 
         return redirect()->route('medicines.index')
@@ -47,22 +49,28 @@ class MedicineController extends Controller
     }
 
     public function update(Request $request, Medicine $medicine)
-    {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'price' => 'required|numeric|min:0',
-            'stock' => 'required|integer|min:0',
-            'category' => 'required|string|max:255',
-            'expired_date' => 'required|date|after:today',
-            'manufacturer' => 'required|string|max:255',
-        ]);
+{
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'description' => 'nullable|string',
+        'price' => 'required|numeric|min:0',
+        'stock' => 'required|integer|min:0',
+        'category' => 'required|string|max:255',
+        'image' => 'sometimes|image|mimes:jpg,jpeg,png|max:2048',
+        'expired_date' => 'required|date|after:today',
+        'manufacturer' => 'required|string|max:255',
+    ]);
 
-        $medicine->update($validated);
-
-        return redirect()->route('medicines.index')
-            ->with('success', 'Obat berhasil diperbarui.');
+    if ($request->hasFile('image')) {
+        $gambar = $request->file('image')->store('gambar_obat', 'public');
+        $validated['image'] = $gambar;
     }
+
+    $medicine->update($validated); 
+
+    return redirect()->route('medicines.index')
+        ->with('success', 'Obat berhasil diperbarui.');
+}
 
     public function destroy(Medicine $medicine)
     {

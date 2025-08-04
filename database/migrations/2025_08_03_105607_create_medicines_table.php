@@ -15,6 +15,7 @@ return new class extends Migration
             $table->decimal('price', 10, 2);
             $table->integer('stock');
             $table->string('category');
+            $table->string('image');
             $table->date('expired_date');
             $table->string('manufacturer');
             $table->timestamps();
