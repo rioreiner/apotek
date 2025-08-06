@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apotek Digital - Sistem Manajemen Obat</title>
+    <title>R-Apotek - Sistem Manajemen Obat</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-50">
@@ -17,7 +17,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
                         </svg>
                     </div>
-                    <span class="text-xl font-bold text-gray-900">Apotek Digital</span>
+                    <span class="text-xl font-bold text-gray-900">R-Apotek</span>
                 </div>
                 
                 <div class="flex items-center space-x-4">
@@ -190,7 +190,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-6 6-6-6"></path>
                             </svg>
                         </div>
-                        <span class="text-xl font-bold">Apotek Digital</span>
+                        <span class="text-xl font-bold">R-Apotek</span>
                     </div>
                     <p class="text-gray-400 mb-4">
                         Solusi manajemen apotek modern yang membantu Anda mengelola inventori dengan efisien.
@@ -233,7 +233,7 @@
             </div>
             
             <div class="border-t border-gray-800 pt-8 mt-8 text-center">
-                <p class="text-gray-400">&copy; 2024 Apotek Digital. All rights reserved.</p>
+                <p class="text-gray-400">&copy; 2025 R-Apotek. All rights reserved.</p>
             </div>
         </div>
     </footer>

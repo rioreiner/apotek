@@ -10,15 +10,26 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6">
                     <form action="{{ route('dashboard') }}" method="GET" class="mb-6">
-                    
-                    <div class="col-md-10">
-                        <input type="text" name="search" class="form-control" 
-                               placeholder="Cari nama Obat..." value="{{ request('search') }}">
+                        <div class="col-md-10">
+                            <input type="text" name="search" class="form-control" 
+                                   placeholder="Cari nama Obat..." value="{{ request('search') }}">
                         </div>
-                        </form>
+                    </form>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         @forelse($medicines as $medicine)
                             <div class="border rounded-lg p-4 hover:shadow-lg transition-shadow duration-200">
+                                <div class="flex justify-center mb-3">
+                                    @if ($medicine->image)
+                                        <img src="{{ asset('storage/'.$medicine->image) }}"
+                                             alt="{{ $medicine->name }}"
+                                             class="h-32 w-32 object-cover rounded-lg shadow"
+                                             style="max-width:100%;">
+                                    @else
+                                        <div class="bg-gray-100 text-gray-400 flex items-center justify-center h-32 w-32 rounded-lg">
+                                            <span>Tidak ada gambar</span>
+                                        </div>
+                                    @endif
+                                </div>
                                 <h3 class="text-lg font-semibold text-gray-900 mb-2">{{ $medicine->name }}</h3>
                                 <p class="text-gray-600 text-sm mb-2">{{ $medicine->category }}</p>
                                 <p class="text-gray-500 text-sm mb-3">{{ Str::limit($medicine->description, 100) }}</p>

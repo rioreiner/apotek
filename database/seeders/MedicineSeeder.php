@@ -19,6 +19,7 @@ class MedicineSeeder extends Seeder
                 'category' => 'Obat Bebas',
                 'expired_date' => now()->addMonths(12),
                 'manufacturer' => 'Kimia Farma',
+                'image' => 'paracetamol_500mg.jpg',
             ],
             [
                 'name' => 'Amoxicillin 500mg',
@@ -28,6 +29,7 @@ class MedicineSeeder extends Seeder
                 'category' => 'Obat Keras',
                 'expired_date' => now()->addMonths(18),
                 'manufacturer' => 'Kalbe Farma',
+                'image' => 'amoxicillin_500mg.jpg',
             ],
             [
                 'name' => 'Vitamin C 1000mg',
@@ -37,6 +39,7 @@ class MedicineSeeder extends Seeder
                 'category' => 'Suplemen',
                 'expired_date' => now()->addMonths(24),
                 'manufacturer' => 'Sido Muncul',
+                'image' => 'vitamin_c_1000mg.jpg',
             ],
             [
                 'name' => 'Ibuprofen 400mg',
@@ -46,6 +49,7 @@ class MedicineSeeder extends Seeder
                 'category' => 'Obat Bebas Terbatas',
                 'expired_date' => now()->addMonths(6),
                 'manufacturer' => 'Dexa Medica',
+                'image' => 'ibuprofen_400mg.jpg',
             ],
             [
                 'name' => 'Antasida DOEN',
@@ -55,6 +59,7 @@ class MedicineSeeder extends Seeder
                 'category' => 'Obat Bebas',
                 'expired_date' => now()->addMonths(15),
                 'manufacturer' => 'Tempo Scan Pacific',
+                'image' => 'antasida_doen.jpg',
             ]
         ];
 
