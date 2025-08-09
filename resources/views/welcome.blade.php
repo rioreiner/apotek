@@ -5,54 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>R-Apotek - Sistem Manajemen Obat</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Arial', sans-serif; }
+        .hero-bg {
+            background-image: url('hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.5); /* Overlay gelap agar teks terbaca */
+        }
+    </style>
 </head>
 <body class="bg-gray-50">
-    <!-- Navigation -->
-    <nav class="bg-white shadow-sm border-b">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center space-x-2">
-                    <div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
-                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                        </svg>
-                    </div>
-                    <span class="text-xl font-bold text-gray-900">R-Apotek</span>
+
+<!-- Navbar -->
+<nav class="bg-white shadow-md border-b sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4">
+        <div class="flex justify-between items-center h-16">
+            <!-- Logo -->
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-gradient-to-tr from-blue-500 to-blue-300 rounded-xl flex items-center justify-center shadow">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
                 </div>
-                
-                <div class="flex items-center space-x-4">
-                    <a href="/login" class="text-gray-600 hover:text-blue-500">Masuk</a>
-                    <a href="/register" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">Daftar</a>
-                </div>
+                <span class="text-xl md:text-2xl font-bold text-blue-600 tracking-tight">R-Apotek</span>
+            </div>
+            <!-- Menu desktop -->
+            <div class="hidden md:flex items-center space-x-3">
+                <a href="/login" class="px-4 py-2 rounded-lg text-blue-600 font-bold hover:bg-blue-50 transition">Masuk</a>
+                <a href="/register" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-bold shadow transition">Daftar</a>
+            </div>
+            <!-- Mobile menu button -->
+            <div class="md:hidden">
+                <button id="nav-toggle" class="p-2 rounded-md hover:bg-gray-100">
+                    <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
             </div>
         </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="bg-white">
-        <div class="max-w-6xl mx-auto px-4 py-20">
-            <div class="text-center">
-                <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-                    Sistem Apotek
-                    <span class="text-blue-500">Modern</span>
-                </h1>
-                <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-                    Kelola inventori obat dengan mudah dan efisien. 
-                    Solusi digital untuk apotek masa kini.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="/register" class="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-lg font-medium">
-                        Mulai Sekarang
-                    </a>
-                    <a href="#fitur" class="border border-gray-300 hover:border-blue-500 text-gray-700 hover:text-blue-500 px-8 py-3 rounded-lg font-medium">
-                        Pelajari Fitur
-                    </a>
-                </div>
-            </div>
+        <!-- Mobile menu -->
+        <div id="nav-menu" class="hidden md:hidden flex-col space-y-2 mt-2 pb-4">
+            <a href="/login" class="block px-4 py-2 text-blue-600 hover:bg-blue-50 rounded">Masuk</a>
+            <a href="/register" class="block px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Daftar</a>
         </div>
-    </section>
+    </div>
+</nav>
 
-    <!-- Features Section -->
+<!-- Hero Section -->
+<section class="hero-bg relative py-20 sm:py-28 flex items-center">
+    <div class="relative max-w-6xl mx-auto text-center text-white px-4 z-10">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">Sistem Apotek <span class="text-blue-400">Modern</span></h1>
+        <p class="text-lg sm:text-xl mb-8 max-w-2xl mx-auto">Kelola inventori obat dengan mudah dan efisien. Solusi digital untuk apotek masa kini.</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="/register" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-medium">Mulai Sekarang</a>
+            <a href="#fitur" class="border border-white hover:border-blue-500 text-white hover:text-blue-500 px-6 py-3 rounded-lg font-medium">Pelajari Fitur</a>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
     <section id="fitur" class="py-20">
         <div class="max-w-6xl mx-auto px-4">
             <div class="text-center mb-16">
@@ -129,130 +148,39 @@
             </div>
         </div>
     </section>
-
-    <!-- Stats Section -->
-    <section class="bg-white py-16">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">Dipercaya Oleh</h2>
-            </div>
-            
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                <div>
-                    <div class="text-3xl font-bold text-blue-500 mb-2">500+</div>
-                    <div class="text-gray-600">Apotek Terdaftar</div>
-                </div>
-                <div>
-                    <div class="text-3xl font-bold text-green-500 mb-2">50K+</div>
-                    <div class="text-gray-600">Obat Dikelola</div>
-                </div>
-                <div>
-                    <div class="text-3xl font-bold text-purple-500 mb-2">99.9%</div>
-                    <div class="text-gray-600">Uptime</div>
-                </div>
-                <div>
-                    <div class="text-3xl font-bold text-orange-500 mb-2">24/7</div>
-                    <div class="text-gray-600">Support</div>
-                </div>
-            </div>
+    
+<!-- Footer -->
+<footer class="bg-gray-900 text-white py-10 px-4">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+            <h3 class="text-xl font-bold mb-4">R-Apotek</h3>
+            <p class="text-gray-400">Solusi manajemen apotek modern yang membantu mengelola inventori dengan efisien.</p>
         </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="bg-blue-500 py-16">
-        <div class="max-w-4xl mx-auto text-center px-4">
-            <h2 class="text-3xl font-bold text-white mb-4">
-                Siap Mengembangkan Apotek Anda?
-            </h2>
-            <p class="text-xl text-blue-100 mb-8">
-                Bergabunglah dengan ratusan apotek yang telah merasakan kemudahan sistem digital kami
-            </p>
-            
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="/register" class="bg-white text-blue-500 px-8 py-3 rounded-lg font-medium hover:bg-gray-100">
-                    Mulai Gratis Sekarang
-                </a>
-                <a href="#kontak" class="border-2 border-white text-white px-8 py-3 rounded-lg font-medium hover:bg-white hover:text-blue-500">
-                    Hubungi Kami
-                </a>
-            </div>
+        <div>
+            <h3 class="text-lg font-semibold mb-4">Menu</h3>
+            <ul class="space-y-2 text-gray-400">
+                <li><a href="#" class="hover:text-white">Beranda</a></li>
+                <li><a href="#fitur" class="hover:text-white">Fitur</a></li>
+                <li><a href="/login" class="hover:text-white">Login</a></li>
+                <li><a href="/register" class="hover:text-white">Daftar</a></li>
+            </ul>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="kontak" class="bg-gray-900 text-white py-12">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="grid md:grid-cols-3 gap-8">
-                <div>
-                    <div class="flex items-center space-x-2 mb-4">
-                        <div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
-                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-6 6-6-6"></path>
-                            </svg>
-                        </div>
-                        <span class="text-xl font-bold">R-Apotek</span>
-                    </div>
-                    <p class="text-gray-400 mb-4">
-                        Solusi manajemen apotek modern yang membantu Anda mengelola inventori dengan efisien.
-                    </p>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Menu</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white">Beranda</a></li>
-                        <li><a href="#fitur" class="text-gray-400 hover:text-white">Fitur</a></li>
-                        <li><a href="/login" class="text-gray-400 hover:text-white">Login</a></li>
-                        <li><a href="/register" class="text-gray-400 hover:text-white">Daftar</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Kontak</h3>
-                    <ul class="space-y-2">
-                        <li class="flex items-center space-x-2">
-                            <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                            </svg>
-                            <span class="text-gray-400">Maluku, Indonesia</span>
-                        </li>
-                        <li class="flex items-center space-x-2">
-                            <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                            </svg>
-                            <span class="text-gray-400">reinnlamer@gmail.com</span>
-                        </li>
-                        <li class="flex items-center space-x-2">
-                            <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
-                            </svg>
-                            <span class="text-gray-400">+62 822-3972-6125</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="border-t border-gray-800 pt-8 mt-8 text-center">
-                <p class="text-gray-400">&copy; 2025 R-Apotek. All rights reserved.</p>
-            </div>
+        <div>
+            <h3 class="text-lg font-semibold mb-4">Kontak</h3>
+            <p class="text-gray-400">Maluku, Indonesia</p>
+            <p class="text-gray-400">reinnlamer@gmail.com</p>
+            <p class="text-gray-400">+62 822-3972-6125</p>
         </div>
-    </footer>
+    </div>
+    <div class="mt-8 text-center text-gray-500">&copy; 2025 R-Apotek. All rights reserved.</div>
+</footer>
 
-    <!-- Smooth Scroll Script -->
-    <script>
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-    </script>
+<!-- Script toggle mobile menu -->
+<script>
+    document.getElementById('nav-toggle').onclick = function() {
+        document.getElementById('nav-menu').classList.toggle('hidden');
+    };
+</script>
+
 </body>
 </html>
