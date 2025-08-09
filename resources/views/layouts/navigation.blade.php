@@ -2,11 +2,13 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
             <!-- Logo -->
-            <div class="flex items-center space-x-2">
-                <a href="{{ route('dashboard') }}" class="flex items-center">
-                    <x-application-logo class="h-8 w-8 text-blue-600" />
-                    <span class="ml-2 text-xl font-bold text-gray-900">R-Apotek</span>
-                </a>
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-gradient-to-tr from-blue-500 to-blue-300 rounded-xl flex items-center justify-center shadow">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
+                </div>
+                <span class="text-xl md:text-2xl font-extrabold text-blue-600 tracking-tight">R-Apotek</span>
             </div>
             <!-- Navigation Links -->
             <div class="hidden md:flex space-x-8">
